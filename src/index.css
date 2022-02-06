@@ -70,6 +70,13 @@ input[type="text" ]{
 .buttonItem:hover::after{
   content: "Clear List";
   color: #001f3f;
+} 
+.list{
+  height: 40px;
+  padding-top: 8px;
+}
+.complete{
+  text-decoration: line-through;
 }
 
 @media screen and (max-width: 500px){

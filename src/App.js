@@ -36,7 +36,7 @@ const App = () => {
     }
 
     else{
-      const inputData = { id : Math.random() * 10000000000, name : data } // unique id
+      const inputData = { id : Math.random() * 10000000000, name : data, completed: false } // unique id
       console.log(inputData.id); 
       console.log(inputData.name);
       setStore([...store, inputData])  // take all value and store one by one in array
@@ -61,8 +61,13 @@ const App = () => {
 
   // check item
 
-  const checkValue = (index) => {
-    setLine(true);
+  const checkValue = (value) => {
+    setStore(store.map((val) => {
+      if(val.id === value.id){
+        return { ...val, completed: !val.completed }
+      }
+      return val;
+    }))
   }
 
   // edit item
@@ -92,16 +97,16 @@ const App = () => {
               toggle ? <AddIcon className='addButton'onClick={addItemBtn}/> : <EditIcon className='addButton'onClick={addItemBtn}/>
             }
       
-          </div>
+          </div> 
 
-          <ul className="todo_list list-group mt-4">
+          <ul style={{listStyle:"none"}}  className="todo_list list-group mt-4">
             {
               store.map((value) => {
                 return(
-                  <li style={{textDecoration : line ? "line-through" : "none" }} className="list-group-item" key={value.id} >{value.name}
+                  <li className={`list ${ value.completed ? `complete` : ''}`} key={value.id} >{value.name}
                     <DeleteOutlineIcon className='deleteButton' onClick={() => deleteItem(value.id)} />
                     <EditIcon className='editButton' onClick={() => editItem(value.id)} /> 
-                    <CheckIcon className='checkButton' onClick={checkValue} />
+                    <CheckIcon className='checkButton' onClick={() => checkValue(value)} />
                   </li>
                 )
               })
