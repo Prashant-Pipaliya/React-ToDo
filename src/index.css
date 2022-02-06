@@ -1,13 +1,73 @@
-body {
+*{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.todo_main{
+  width: 100vw;
+  height: 100vh;
+  background-color: #001f3f;
+  padding: 100px 0;
+}
+
+.todo_content{
+  width: 400px;
+  margin: auto;
+}
+input[type="text" ]{
+  position: absolute;
+  width: 400px;
+}
+.addButton{
+  color: black;
+  position: relative;
+  left: 90%;
+  margin-top: 7px;
+}
+.todo_list li{
+  margin-bottom: 10px;
+  border-radius: 0!important;
+  background-color: #4c449c;
+  color: white;
+}
+.todo_list li:hover{
+  background-color: white;
+  color: #4c449c;
+}
+.deleteButton{
+  color: white;
+  float: right;
+  margin-left: 7px;
+}
+.todo_list li:hover > .deleteButton{
+  color: red;
+}
+.editButton{
+  float: right;
+  color: white;
+  margin-left: 7px;
+}
+.todo_list li:hover > .editButton{
+  color: rgb(95, 93, 93);
+}
+.checkButton{
+  color: white;
+  float: right;
+  margin-left: 7px;
+}
+.todo_list li:hover > .checkButton{
+  color: green;
+}
+.buttonItem{
+  margin-top: 10px;
+  width: 100px;
+}
+.buttonItem::after{
+  width: 100px;
+  content: "Item List";
+}
+.buttonItem:hover::after{
+  content: "Clear List";
+  color: #001f3f;
 }
