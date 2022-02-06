@@ -71,3 +71,14 @@ input[type="text" ]{
   content: "Clear List";
   color: #001f3f;
 }
+
+@media screen and (max-width: 500px){
+  .todo_content{
+    width: 280px;
+    margin: auto;
+  }
+  input[type="text" ]{
+    position: absolute;
+    width: 280px;
+  }
+}
