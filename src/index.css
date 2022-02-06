@@ -22,7 +22,7 @@ input[type="text" ]{
 .addButton{
   color: black;
   position: relative;
-  left: 90%;
+  left: 93%;
   margin-top: 7px;
 }
 .todo_list li{
@@ -73,6 +73,7 @@ input[type="text" ]{
 } 
 .list{
   height: 40px;
+  padding-left: 10px;
   padding-top: 8px;
 }
 .complete{
@@ -87,5 +88,8 @@ input[type="text" ]{
   input[type="text" ]{
     position: absolute;
     width: 280px;
+  }
+  .addButton{
+    left: 90%;
   }
 }
