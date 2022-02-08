@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditIcon from '@material-ui/icons/Edit';
@@ -9,9 +9,14 @@ const App = () => {
 
   const [data, setData] = useState("");  // fetch input value
   const [store, setStore] = useState([]);
-  const [line, setLine] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [edit, setEdit] = useState(null);
+  const [done, setDone] = useState("all");
+  const [filterData, setFilterData] = useState([]);
+
+  useEffect(() => {
+    filterFunction();
+  },[store, done]) 
 
   // add item
 
@@ -78,6 +83,27 @@ const App = () => {
     setEdit(index);
   }
 
+  const selectButton = (e) => {
+    setDone(e.target.value);
+  }
+
+  // filter item
+
+  const filterFunction = () => {
+    switch (done) {
+      case 'completed':
+        setFilterData(store.filter((value) => value.completed === true ))
+        break;
+      case 'uncompleted':
+        setFilterData(store.filter((value) => value.completed === false ))
+        break;  
+    
+      default:
+        setFilterData(store);
+        break;
+    }
+  }
+
   return (
     <>
       <div className='todo_main' >
@@ -95,13 +121,19 @@ const App = () => {
 
             {
               toggle ? <AddIcon className='addButton'onClick={addItemBtn}/> : <EditIcon className='addButton'onClick={addItemBtn}/>
-            }
-      
+            }    
+
+            <select className="dropDown" onChange={selectButton} aria-label="Default select example">
+              <option selected>All</option>
+              <option value="completed" >Completed</option>
+              <option value="uncompleted" >Uncompleted</option>
+            </select> 
+
           </div> 
 
           <ul style={{listStyle:"none"}}  className="todo_list list-group mt-4">
             {
-              store.map((value) => {
+              filterData.map((value) => {
                 return(
                   <li className={`list ${ value.completed ? `complete` : ''}`} key={value.id} >{value.name}
                     <DeleteOutlineIcon className='deleteButton' onClick={() => deleteItem(value.id)} />
@@ -115,11 +147,11 @@ const App = () => {
 
           {/* map  method store each value in list */}
 
-          <center>
-            <button type="button" onClick={clearList} className="buttonItem btn btn-light"></button>
-          </center>
-
         </div>
+
+        <center>
+            <button type="button" onClick={clearList} className="buttonItem btn btn-light"></button>
+        </center>
 
       </div>
     </>
